@@ -9,10 +9,9 @@ namespace AdminEvent\Controller;
 
 use LibFormatter\Library\Formatter;
 use LibForm\Library\Form;
+use LibForm\Library\Combiner;
 use LibPagination\Library\Paginator;
 use Event\Model\Event;
-use AdminSiteMeta\Library\Meta;
-use LibUpload\Library\Form as UForm;
 
 class EventController extends \Admin\Controller
 {
@@ -40,8 +39,6 @@ class EventController extends \Admin\Controller
             $event = Event::getOne(['id'=>$id]);
             if(!$event)
                 return $this->show404();
-            Meta::parse($event, 'meta');
-            UForm::parse($event, 'cover');
             $params = $this->getParams('Edit Event');
         }else{
             $params = $this->getParams('Create New Event');
@@ -49,13 +46,19 @@ class EventController extends \Admin\Controller
 
         $form              = new Form('admin.event.edit');
         $params['form']    = $form;
+
+        $c_opts = [
+            'cover'      => [null, null, 'json'],
+            'meta'       => [null, null, 'json']
+        ];
+
+        $combiner = new Combiner($id, $c_opts, 'event');
+        $event    = $combiner->prepare($event);
         
         if(!($valid = $form->validate($event)) || !$form->csrfTest('noob'))
             return $this->resp('event/edit', $params);
-
-
-        Meta::combine($valid, 'meta');
-        UForm::combine($valid, 'cover');
+        
+        $valid = $combiner->finalize($valid);
         
         if($id){
             if(!Event::set((array)$valid, ['id'=>$id]))

@@ -2,7 +2,7 @@
 
 return [
     '__name' => 'admin-event',
-    '__version' => '0.0.1',
+    '__version' => '0.0.3',
     '__git' => 'git@github.com:getmim/admin-event.git',
     '__license' => 'MIT',
     '__author' => [
@@ -32,7 +32,10 @@ return [
                 'event' => NULL
             ],
             [
-                'lib-upload' => NULL 
+                'lib-upload' => NULL
+            ],
+            [
+                'admin-site-meta' => NULL
             ]
         ],
         'optional' => []
@@ -195,7 +198,7 @@ return [
     'admin' => [
         'objectFilter' => [
             'handlers' => [
-                'event' => 'AdminEvent\Library\\Filter'
+                'event' => 'AdminEvent\\Library\\Filter'
             ]
         ]
     ]
