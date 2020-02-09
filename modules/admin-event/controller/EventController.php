@@ -48,12 +48,15 @@ class EventController extends \Admin\Controller
         $params['form']    = $form;
 
         $c_opts = [
-            'cover'      => [null, null, 'json'],
-            'meta'       => [null, null, 'json']
+            'cover'      => [null,                  null, 'json'],
+            'meta'       => [null,                  null, 'json'],
+            'organizer'  => ['admin-event-venue',   null, 'format', 'active', 'title']
         ];
 
         $combiner = new Combiner($id, $c_opts, 'event');
         $event    = $combiner->prepare($event);
+
+        $params['opts'] = $combiner->getOptions();
         
         if(!($valid = $form->validate($event)) || !$form->csrfTest('noob'))
             return $this->resp('event/edit', $params);
