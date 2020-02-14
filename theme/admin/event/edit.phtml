@@ -39,12 +39,20 @@
                                 <?= $form->field('cover-url'); ?>
                                 <?= $form->field('cover-label'); ?>
                                 <?= $form->field('address'); ?>
+
+                                <?php if(module_exists('admin-event-profile')): ?>
+                                    <?= $form->field('price'); ?>
+
+                                    <?php if(module_exists('admin-event-venue')): ?>
+                                        <?= $form->field('organizer', $opts['organizer']); ?>
+                                    <?php endif; ?>
+                                <?php endif; ?>
                             </div>
                             <div class="col-md-7">
                                 <?= $form->field('embed'); ?>
-                                <?= $form->field('price'); ?>
-                                <?php if(module_exists('admin-event-venue')): ?>
-                                    <?= $form->field('organizer', $opts['organizer']); ?>
+                                
+                                <?php if(module_exists('admin-event-profile')): ?>
+                                    <?= $form->field('performers') ?>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <?= $form->field('time_start'); ?>
@@ -54,8 +62,21 @@
                                         </div>
                                     </div>
                                 <?php else: ?>
-                                    <?= $form->field('time_start'); ?>
-                                    <?= $form->field('time_end'); ?>
+                                    <?= $form->field('price'); ?>
+                                    <?php if(module_exists('admin-event-venue')): ?>
+                                        <?= $form->field('organizer', $opts['organizer']); ?>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <?= $form->field('time_start'); ?>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <?= $form->field('time_end'); ?>
+                                            </div>
+                                        </div>
+                                    <?php else: ?>
+                                        <?= $form->field('time_start'); ?>
+                                        <?= $form->field('time_end'); ?>
+                                    <?php endif; ?>
                                 <?php endif; ?>
                             </div>
                         </div>

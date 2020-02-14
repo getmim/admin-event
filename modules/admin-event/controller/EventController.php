@@ -50,7 +50,17 @@ class EventController extends \Admin\Controller
         $c_opts = [
             'cover'      => [null,                  null, 'json'],
             'meta'       => [null,                  null, 'json'],
-            'organizer'  => ['admin-event-venue',   null, 'format', 'active', 'title']
+            'organizer'  => ['admin-event-venue',   null, 'format', 'active', 'title'],
+            'performers' => ['admin-event-profile', null, 'format-json', 'active', 'value', 
+                [
+                    'name'  => '.fullname',
+                    'path'  => '#0',
+                    'type'  => '.email',
+                    'thumb' => null,
+                    'icon'  => '<i class="fas fa-user-md"></i>',
+                    'value' => '.id'
+                ]
+            ]
         ];
 
         $combiner = new Combiner($id, $c_opts, 'event');
@@ -58,19 +68,22 @@ class EventController extends \Admin\Controller
 
         $params['opts'] = $combiner->getOptions();
         
-        if(!($valid = $form->validate($event)) || !$form->csrfTest('noob'))
+        if(!($valid = $form->validate($event)) /* || !$form->csrfTest('noob') */)
             return $this->resp('event/edit', $params);
+
         
         $valid = $combiner->finalize($valid);
-        
+
         if($id){
             if(!Event::set((array)$valid, ['id'=>$id]))
                 deb(Event::lastError());
         }else{
             $valid->user = $this->user->id;
-            if(!Event::create((array)$valid))
+            if(!($id = Event::create((array)$valid)))
                 deb(Event::lastError());
         }
+
+        $combiner->save($id, $this->user->id);
 
         // add the log
         $this->addLog([

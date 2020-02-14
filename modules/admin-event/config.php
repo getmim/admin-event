@@ -2,7 +2,7 @@
 
 return [
     '__name' => 'admin-event',
-    '__version' => '0.0.3',
+    '__version' => '0.1.0',
     '__git' => 'git@github.com:getmim/admin-event.git',
     '__license' => 'MIT',
     '__author' => [
