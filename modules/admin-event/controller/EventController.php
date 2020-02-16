@@ -68,7 +68,7 @@ class EventController extends \Admin\Controller
 
         $params['opts'] = $combiner->getOptions();
         
-        if(!($valid = $form->validate($event)) /* || !$form->csrfTest('noob') */)
+        if(!($valid = $form->validate($event)) || !$form->csrfTest('noob'))
             return $this->resp('event/edit', $params);
 
         
