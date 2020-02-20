@@ -2,7 +2,7 @@
 
 return [
     '__name' => 'admin-event',
-    '__version' => '0.1.1',
+    '__version' => '0.1.2',
     '__git' => 'git@github.com:getmim/admin-event.git',
     '__license' => 'MIT',
     '__author' => [
@@ -153,7 +153,16 @@ return [
                 'price' => [
                     'label' => 'Price',
                     'type' => 'number',
-                    'rules' => []
+                    'rules' => [
+                        'required' => true,
+                        'empty' => false,
+                        'numeric' => [
+                            'min' => 0
+                        ]
+                    ],
+                    'filter' => [
+                        'integer' => true
+                    ]
                 ],
                 'address' => [
                     'label' => 'Address',

@@ -71,7 +71,6 @@ class EventController extends \Admin\Controller
         if(!($valid = $form->validate($event)) || !$form->csrfTest('noob'))
             return $this->resp('event/edit', $params);
 
-        
         $valid = $combiner->finalize($valid);
 
         if($id){
