@@ -174,6 +174,11 @@ return [
                     'type' => 'summernote',
                     'rules' => []
                 ],
+                'ages' => [
+                    'label' => 'Allowed Ages',
+                    'type' => 'text',
+                    'rules' => []
+                ],
                 'meta-schema' => [
                     'options' => [
                         'Event' => 'Event',
