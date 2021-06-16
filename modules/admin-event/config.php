@@ -2,7 +2,7 @@
 
 return [
     '__name' => 'admin-event',
-    '__version' => '0.1.2',
+    '__version' => '0.2.0',
     '__git' => 'git@github.com:getmim/admin-event.git',
     '__license' => 'MIT',
     '__author' => [
@@ -204,6 +204,41 @@ return [
                         'SportsEvent' => 'SportsEvent',
                         'TheaterEvent' => 'TheaterEvent',
                         'VisualArtsEvent' => 'VisualArtsEvent'
+                    ]
+                ],
+                'socials-website' => [
+                    'label' => 'Website',
+                    'type' => 'url',
+                    'rules' => [
+                        'url' => TRUE
+                    ]
+                ],
+                'socials-twitter' => [
+                    'label' => 'Twitter',
+                    'type' => 'url',
+                    'rules' => [
+                        'url' => TRUE
+                    ]
+                ],
+                'socials-youtube' => [
+                    'label' => 'Youtube',
+                    'type' => 'url',
+                    'rules' => [
+                        'url' => TRUE
+                    ]
+                ],
+                'socials-instagram' => [
+                    'label' => 'Instagram',
+                    'type' => 'url',
+                    'rules' => [
+                        'url' => TRUE
+                    ]
+                ],
+                'socials-facebook' => [
+                    'label' => 'Facebook',
+                    'type' => 'url',
+                    'rules' => [
+                        'url' => TRUE
                     ]
                 ]
             ]

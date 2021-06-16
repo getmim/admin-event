@@ -51,7 +51,8 @@ class EventController extends \Admin\Controller
             'cover'      => [null,                  null, 'json'],
             'meta'       => [null,                  null, 'json'],
             'organizer'  => ['admin-event-venue',   null, 'format', 'active', 'title'],
-            'performers' => ['admin-event-profile', null, 'format-json', 'active', 'value', 
+            'socials'    => [null,                  null, 'json'],
+            'performers' => ['admin-event-profile', null, 'format-json', 'active', 'value',
                 [
                     'name'  => '.fullname',
                     'path'  => '#0',
