@@ -155,7 +155,6 @@ return [
                     'type' => 'number',
                     'rules' => [
                         'required' => true,
-                        'empty' => false,
                         'numeric' => [
                             'min' => 0
                         ]
